@@ -1,0 +1,131 @@
+<mat-card>
+    <h1>Regresión lineal</h1>
+    <input
+      type="file"
+      class="file-input"
+      accept=".csv, .xlsx"
+      #file
+      (change)="onChange(file.files)"
+    />
+  
+    <div class="file-upload">
+      {{ fileName || "Suba un archivo .csv o .xlsx" }}
+  
+      <button
+        mat-mini-fab
+        color="secondary"
+        class="upload-btn"
+        (click)="file.click()"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
+  
+      <br />
+    </div>
+    
+    <!-- <br />
+    <input matInput (keyup)="onChangeX($event)" placeholder="columna tiempo" />
+    <br /><br />
+    <input matInput (keyup)="onChangeY($event)" placeholder="columna datos" />
+    <br />
+    <br /> -->
+    <br> 
+<table>
+<tr>
+<td><h2>IngreseX</h2><mat-form-field class="ingreso" appearance="fill">
+    <mat-label>Tiempo</mat-label>
+    <input matInput (keyup)="onChangeX($event)">
+</mat-form-field></td>
+        
+<td><h2>IngreseY</h2><mat-form-field class="ingreso" appearance="fill">
+  <mat-label>Datos</mat-label>
+  <input matInput (keyup)="onChangeY($event)">
+</mat-form-field></td>
+</tr>
+</table>
+  
+    <button mat-raised-button (click)="onUpload()" class="btn btn-success">
+      Cargar datos
+    </button>
+    <br />
+  </mat-card>
+  <br />
+  <br />
+  <mat-card id="hidden">
+    <h3>Resultado regresión lineal:</h3>
+    <p>{{ valoresP }}</p>
+    <br />
+    <p>Gráfica:</p>
+    <img [src]="rutaImg" />
+    <br />
+    <p>Tabla de datos:</p>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="Datos x">
+          <th mat-header-cell *matHeaderCellDef>Datos x</th>
+          <td mat-cell *matCellDef="let element">{{ element["Datos x"] }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Datos y">
+          <th mat-header-cell *matHeaderCellDef>Datos y</th>
+          <td mat-cell *matCellDef="let element">{{ element["Datos y"] }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Regresión Lineal">
+          <th mat-header-cell *matHeaderCellDef>Regresión Lineal</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["Regresión Lineal"] }}
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+  
+      <mat-paginator
+        [pageSizeOptions]="[10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of data"
+      >
+      </mat-paginator>
+    </div>
+  </mat-card>
+
+
+
+  <!-- footer -->
+<footer>
+
+  <div class="container__footer">
+      <div class="box__footer">
+          <div class="logo">
+          </div>
+          <div class="terms">
+              <p>La regresión lineal es una técnica de modelado estadístico que se emplea para describir una variable de respuesta continua como una función de una o varias variables predictoras. Puede ayudar a comprender y predecir el comportamiento de sistemas complejos o a analizar datos experimentales, financieros y biológicos.
+              </p>
+          </div>
+      </div>
+
+      <div class="box__footer">
+          <h2>Temas</h2>
+          <a>PROMEDIO MOVIL</a> 
+          <a>SUAVIZAMIENTO</a>
+          <a>REGRESION LINEAL</a>
+          <a>REGRESION CUADRATICA</a>              
+      </div>
+
+      <div class="box__footer">
+          <h2>Redes Sociales</h2>
+          <a href="https://www.facebook.com">Facebook</a>
+          <a href="https://twitter.com/home">Twitter</a>
+          <a href="https://www.instagram.com/luis_rodas5/">Instagram</a>
+          <a href="https://discord.gg/lapu">Discord</a>
+      </div>
+
+  </div>
+
+  <div class="box__copyright">
+      <hr>
+      <p>Todos los derechos reservados © 2021 <b>LAPU</b></p>
+  </div>
+</footer>

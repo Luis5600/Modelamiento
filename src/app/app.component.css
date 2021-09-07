@@ -1,0 +1,13 @@
+.mat-toolbar {
+    background: rgb(247, 71, 71);
+
+}
+
+.space {
+    flex: auto 3 3;
+}
+
+.Titulo {
+    text-decoration: none;
+    color: white;
+}

@@ -1,0 +1,31 @@
+<mat-toolbar color=primary class="mat-elevation-z6">
+    <a class="Titulo" routerLink=''><mat-icon>grade</mat-icon> Home </a>
+    
+    <div class="space"></div>
+    
+    <button mat-button [matMenuTriggerFor]="menu1">PRONOSTICO</button>
+    <mat-menu #menu1="matMenu">
+        <button routerLink="Promedio movil" mat-menu-item><mat-icon>done_outline</mat-icon>Promedio movil</button>
+        <button routerLink="Suavizamiento" mat-menu-item><mat-icon>done_outline</mat-icon>Suavizamiento</button>
+        <button routerLink="Regresion lineal" mat-menu-item><mat-icon>done_outline</mat-icon>Regresion lineal</button>
+        <button routerLink="Regresion cuadratica" mat-menu-item><mat-icon>done_outline</mat-icon>Regresion cuadratica</button>
+    </mat-menu>
+    
+    <button mat-button [matMenuTriggerFor]="menu2">SIMULACION</button>
+    <mat-menu #menu2="matMenu">
+        <button routerLink="Montecarlo" mat-menu-item><mat-icon>done_outline</mat-icon>Montecarlo</button>
+        <button routerLink="Inventarios" mat-menu-item><mat-icon>done_outline</mat-icon>Inventarios</button>
+        <button routerLink="Linea de espera" mat-menu-item><mat-icon>done_outline</mat-icon>Linea de espera</button>
+    </mat-menu>
+    
+    <button mat-button [matMenuTriggerFor]="menu3">PLUS</button>
+    <mat-menu #menu3="matMenu">
+        <button routerLink="Extraccion de Datos" mat-menu-item><mat-icon>done_outline</mat-icon>Extraccion de Datos</button>
+        <button routerLink="Numeros aleatorios" mat-menu-item><mat-icon>done_outline</mat-icon>Numeros aleatorios</button>
+        <button routerLink="Media, Mediana, Moda" mat-menu-item><mat-icon>done_outline</mat-icon>Media, Mediana, Moda</button>
+    </mat-menu>
+    
+    
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>

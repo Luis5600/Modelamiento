@@ -1,0 +1,82 @@
+<mat-card>
+    <h1>Media, mediana y moda</h1>
+    <input type="file" class="file-input" #file (change)="onChange(file.files)" />
+    <div class="centrado">
+    <div class="file-upload">
+    {{ fileName || "Suba un archivo" }}
+
+    <button
+        mat-mini-fab
+        color="secondary"
+        class="upload-btn"
+        (click)="file.click()"
+    >
+        <mat-icon>settings</mat-icon>
+    </button>
+
+    <br />
+    </div>
+    <br />
+    <h2>Columna a analizar</h2>
+    <!-- <input matInput (keyup)="onChangeColumna($event)" placeholder="columna" /> -->
+    <br>
+<table>
+<tr>
+<td><mat-form-field class="ingreso" appearance="fill">
+    <mat-label>Ingrese Columna</mat-label>
+    <input matInput (keyup)="onChangeColumna($event)">
+</mat-form-field></td>
+</tr>
+</table>
+    <br />
+    <button mat-raised-button (click)="onUpload()" class="btn btn-success">
+    Cargar datos
+    </button>
+    <ng-container *ngIf="llegaronDatos">
+    <br />
+    <br />
+    <h3>{{ nombreColumna }}</h3>
+    <p>Media: {{ media }}</p>
+    <p>Mediana: {{ mediana }}</p>
+    <p>Moda: {{ moda }}</p>
+    </ng-container>
+</div>
+</mat-card>
+
+
+
+<!-- footer -->
+<footer>
+
+    <div class="container__footer">
+        <div class="box__footer">
+            <div class="logo">
+            </div>
+            <div class="terms">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas impedit cum cumque velit libero officiis quam doloremque reprehenderit quae corporis! Delectus architecto officia praesentium atque laudantium, nam deleniti sapiente deserunt.</p>
+            </div>
+        </div>
+
+        <div class="box__footer">
+            <h2>Temas</h2>
+            <a>Acerca de</a>
+            <a>Trabajos</a>
+            <a>Procesos</a>
+            <a>Servicios</a>              
+        </div>
+
+        <div class="box__footer">
+            <h2>Redes Sociales</h2>
+            <a href="https://www.facebook.com">Facebook</a>
+            <a href="https://twitter.com/home">Twitter</a>
+            <a href="https://www.instagram.com/luis_rodas5/">Instagram</a>
+            <a href="https://discord.gg/lapu">Discord</a>
+        </div>
+
+    </div>
+
+    <div class="box__copyright">
+        <hr>
+        <p>Todos los derechos reservados © 2021 <b>LAPU</b></p>
+    </div>
+</footer>

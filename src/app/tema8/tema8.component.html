@@ -1,0 +1,199 @@
+<mat-card>
+    <h1>Simulación de Montecarlo</h1>
+    <input
+      type="file"
+      class="file-input"
+      accept=".csv, .xlsx"
+      #file
+      (change)="onChange(file.files)"
+    />
+  
+    <div class="file-upload">
+      {{ fileName || "Suba un archivo .csv o .xlsx" }}
+  
+      <button
+        mat-mini-fab
+        color="secondary"
+        class="upload-btn"
+        (click)="file.click()"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
+  
+      <br />
+    </div>
+    
+    <!-- <br />
+    <input matInput (keyup)="onChangeX($event)" placeholder="columna índices" />
+    <br /><br />
+    <input matInput (keyup)="onChangeY($event)" placeholder="columna datos" />
+    <br /> -->
+    <table>
+        <tr>
+        <td><h2>Indice</h2><mat-form-field class="ingreso" appearance="fill">
+            <mat-label>Indice</mat-label>
+            <input matInput (keyup)="onChangeX($event)">
+        </mat-form-field></td>
+                
+        <td><h2>Datos</h2><mat-form-field class="ingreso" appearance="fill">
+          <mat-label>Datos</mat-label>
+          <input matInput (keyup)="onChangeY($event)">
+        </mat-form-field></td>
+        </tr>
+        </table>
+    
+    <br />
+    <table>
+        <tr>
+        <td><h2>Probabilidades</h2><mat-form-field class="ingreso" appearance="fill">
+            <mat-label>probabilidades</mat-label>
+            <input matInput (keyup)="onChangeProbabilidades($event)">
+        </mat-form-field></td>
+                
+        <td><h2>Simulaciones</h2><mat-form-field class="ingreso" appearance="fill">
+          <mat-label>simulaciones</mat-label>
+          <input matInput (keyup)="onChangeSimulaciones($event)">
+        </mat-form-field></td>
+        </tr>
+        </table>
+
+    <button mat-raised-button (click)="onUpload()" class="btn btn-success">
+      Cargar datos
+    </button>
+    <br />
+  </mat-card>
+  <br />
+  <br />
+  <mat-card id="hidden">
+    <h3>Resultado de la simulación:</h3>
+    <br />
+    <p>Tabla de datos:</p>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource1">
+        <ng-container *ngIf="llegaronDatos">
+          <ng-container [matColumnDef]="nombreX">
+            <th mat-header-cell *matHeaderCellDef>{{ nombreX }}</th>
+            <td mat-cell *matCellDef="let element">{{ element[nombreX] }}</td>
+          </ng-container>
+  
+          <ng-container [matColumnDef]="nombreY">
+            <th mat-header-cell *matHeaderCellDef>{{ nombreY }}</th>
+            <td mat-cell *matCellDef="let element">{{ element[nombreY] }}</td>
+          </ng-container>
+  
+          <ng-container [matColumnDef]="nombreProbabilidades">
+            <th mat-header-cell *matHeaderCellDef>{{ nombreProbabilidades }}</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element[nombreProbabilidades] }}
+            </td>
+          </ng-container>
+        </ng-container>
+  
+        <ng-container matColumnDef="FDP">
+          <th mat-header-cell *matHeaderCellDef>FDP</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["FDP"] }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Min">
+          <th mat-header-cell *matHeaderCellDef>Min</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["Min"] }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Max">
+          <th mat-header-cell *matHeaderCellDef>Max</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["Max"] }}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      </table>
+  
+      <mat-paginator
+        [pageSizeOptions]="[10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of data"
+      >
+      </mat-paginator>
+    </div>
+  
+    <br />
+    <br />
+    <p>Suma de simulaciones</p>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource2">
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Num.</th>
+          <td mat-cell *matCellDef="let i = index">
+            {{
+              this.paginator2.pageIndex == 0
+                ? i + 1
+                : 1 + i + this.paginator2.pageIndex * this.paginator2.pageSize
+            }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Suma de las simulaciones">
+          <th mat-header-cell *matHeaderCellDef>Suma de las simulaciones</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["Suma de las simulaciones"] }}
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+      </table>
+  
+      <mat-paginator
+        [pageSizeOptions]="[10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of data"
+      >
+      </mat-paginator>
+    </div>
+    <br />
+    <br />
+    <p>Gráfica:</p>
+    <img [src]="rutaImg" />
+  </mat-card>
+
+
+  <!-- footer -->
+<footer>
+
+    <div class="container__footer">
+        <div class="box__footer">
+            <div class="logo">
+            </div>
+            <div class="terms">
+                <p>La simulación de Montecarlo es un método enfocado en la resolución de problemas de carácter matemático a través de un modelo estadístico que consiste en generar posibles escenarios resultantes de una serie de datos iniciales.
+                </p>
+            </div>
+        </div>
+  
+        <div class="box__footer">
+            <h2>Temas</h2>
+            <a>MONTECARLO</a> 
+            <a>INVENTARIOS</a>
+            <a>LINEA DE ESPERA</a>
+                         
+        </div>
+  
+        <div class="box__footer">
+            <h2>Redes Sociales</h2>
+            <a href="https://www.facebook.com">Facebook</a>
+            <a href="https://twitter.com/home">Twitter</a>
+            <a href="https://www.instagram.com/luis_rodas5/">Instagram</a>
+            <a href="https://discord.gg/lapu">Discord</a>
+        </div>
+  
+    </div>
+  
+    <div class="box__copyright">
+        <hr>
+        <p>Todos los derechos reservados © 2021 <b>LAPU</b></p>
+    </div>
+  </footer>

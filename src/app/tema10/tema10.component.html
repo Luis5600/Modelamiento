@@ -1,0 +1,217 @@
+<mat-card>
+    <h1>Simulación de linea de espera</h1>
+  
+    <br />
+  
+    <!-- <h3>Lambda</h3>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Ingrese lambda </mat-label>
+      <input matInput [(ngModel)]="datos.lambda" />
+    </mat-form-field>
+    <br /><br />
+  
+    <h3>Nu</h3>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Ingrese nu</mat-label>
+      <input matInput [(ngModel)]="datos.nu" />
+    </mat-form-field>
+    <br />
+    <br /> -->
+    <table>
+        <tr>
+        <td><h2>Lambda</h2><mat-form-field class="ingreso" appearance="fill">
+            <mat-label>Ingrese Lambda</mat-label>
+            <input matInput [(ngModel)]="datos.lambda" />
+        </mat-form-field></td>
+                
+        <td><h2>Nu</h2><mat-form-field class="ingreso" appearance="fill">
+          <mat-label>Ingrese Nu</mat-label>
+          <input matInput [(ngModel)]="datos.nu" />
+        </mat-form-field></td>
+        </tr>
+        </table>
+  
+    <button mat-raised-button (click)="onUpload()" class="btn btn-success">
+      Cargar datos
+    </button>
+    <br />
+  </mat-card>
+  <br />
+  <br />
+  <mat-card id="hidden">
+    <h3>Resultado de la simulación:</h3>
+    <br />
+    <p>Tabla de datos:</p>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource1">
+        <ng-container matColumnDef="A_LLEGADA">
+          <th mat-header-cell *matHeaderCellDef>A_LLEGADA</th>
+          <td mat-cell *matCellDef="let element">{{ element.A_LLEGADA }}</td>
+        </ng-container>
+        <ng-container matColumnDef="A_SERVICIO">
+          <th mat-header-cell *matHeaderCellDef>A_SERVICIO</th>
+          <td mat-cell *matCellDef="let element">{{ element.A_SERVICIO }}</td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_LLEGADA">
+          <th mat-header-cell *matHeaderCellDef>TIE_LLEGADA</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.TIE_LLEGADA }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_SERVICIO">
+          <th mat-header-cell *matHeaderCellDef>TIE_SERVICIO</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_SERVICIO"] }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="TIE_EXACTO_LLEGADA">
+          <th mat-header-cell *matHeaderCellDef>TIE_EXACTO_LLEGADA</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_EXACTO_LLEGADA"] }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_INI_SERVICIO">
+          <th mat-header-cell *matHeaderCellDef>TIE_INI_SERVICIO</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_INI_SERVICIO"] }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_FIN_SERVICIO">
+          <th mat-header-cell *matHeaderCellDef>TIE_FIN_SERVICIO</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_FIN_SERVICIO"] }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_ESPERA">
+          <th mat-header-cell *matHeaderCellDef>TIE_ESPERA</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_ESPERA"] }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_EN_SISTEMA">
+          <th mat-header-cell *matHeaderCellDef>TIE_EN_SISTEMA</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_EN_SISTEMA"] }}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      </table>
+  
+      <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of data">
+      </mat-paginator>
+    </div>
+    <br>
+    <br>
+  
+    <p>Gráfica:</p>
+    <img [src]="grafica" />
+    <br>
+    <br>
+    <p>Tabla describe:</p>
+    <div class="mat-elevation-z8">
+  
+      <table mat-table [dataSource]="dataSource2">
+        <ng-container matColumnDef="CATEGORIAS">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element; let i = index;">{{ categorias[i] }}</td>
+        </ng-container>
+        <ng-container matColumnDef="A_LLEGADA">
+          <th mat-header-cell *matHeaderCellDef>A_LLEGADA</th>
+          <td mat-cell *matCellDef="let element">{{ element.A_LLEGADA }}</td>
+        </ng-container>
+        <ng-container matColumnDef="A_SERVICIO">
+          <th mat-header-cell *matHeaderCellDef>A_SERVICIO</th>
+          <td mat-cell *matCellDef="let element">{{ element.A_SERVICIO }}</td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_LLEGADA">
+          <th mat-header-cell *matHeaderCellDef>TIE_LLEGADA</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.TIE_LLEGADA }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_SERVICIO">
+          <th mat-header-cell *matHeaderCellDef>TIE_SERVICIO</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_SERVICIO"] }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="TIE_EXACTO_LLEGADA">
+          <th mat-header-cell *matHeaderCellDef>TIE_EXACTO_LLEGADA</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_EXACTO_LLEGADA"] }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_INI_SERVICIO">
+          <th mat-header-cell *matHeaderCellDef>TIE_INI_SERVICIO</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_INI_SERVICIO"] }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_FIN_SERVICIO">
+          <th mat-header-cell *matHeaderCellDef>TIE_FIN_SERVICIO</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_FIN_SERVICIO"] }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_ESPERA">
+          <th mat-header-cell *matHeaderCellDef>TIE_ESPERA</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_ESPERA"] }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="TIE_EN_SISTEMA">
+          <th mat-header-cell *matHeaderCellDef>TIE_EN_SISTEMA</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element["TIE_EN_SISTEMA"] }}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+      </table>
+  
+      <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of data">
+      </mat-paginator>
+    </div>
+  
+  </mat-card>
+
+
+  <!-- footer -->
+<footer>
+
+  <div class="container__footer">
+      <div class="box__footer">
+          <div class="logo">
+          </div>
+          <div class="terms">
+              <p>Se conoce como línea de espera a una hilera formada por uno o varios clientes que aguardan para recibir un servicio. Los clientes pueden ser personas, objetos, máquinas que requieren mantenimiento, contenedores con mercancías en espera de ser embarcados o elementos de inventario a punto de ser utilizados.
+              </p>
+          </div>
+      </div>
+
+      <div class="box__footer">
+          <h2>Temas</h2>
+          <a>MONTECARLO</a> 
+          <a>INVENTARIOS</a>
+          <a>LINEA DE ESPERA</a>
+                       
+      </div>
+
+      <div class="box__footer">
+          <h2>Redes Sociales</h2>
+          <a href="https://www.facebook.com">Facebook</a>
+          <a href="https://twitter.com/home">Twitter</a>
+          <a href="https://www.instagram.com/luis_rodas5/">Instagram</a>
+          <a href="https://discord.gg/lapu">Discord</a>
+      </div>
+
+  </div>
+
+  <div class="box__copyright">
+      <hr>
+      <p>Todos los derechos reservados © 2021 <b>LAPU</b></p>
+  </div>
+</footer>
